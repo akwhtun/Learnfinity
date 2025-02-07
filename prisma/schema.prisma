@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  password  String?
+  progress  Progress[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Skill {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  description String?
+  lessons     Lesson[]
+}
+
+model Lesson {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String
+  activities  Activity[]
+  skillId     Int
+  skill       Skill      @relation(fields: [skillId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  Exercise    Exercise[]
+}
+
+model Activity {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String
+  content     String
+  image       String?
+  lessonId    Int
+  lesson      Lesson     @relation(fields: [lessonId], references: [id])
+  progress    Progress[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Progress {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  activityId Int
+  activity   Activity @relation(fields: [activityId], references: [id])
+  score      Int      @default(0) // Score or completion status
+  completed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Exercise {
+  id       String  @id @default(uuid())
+  question String
+  image    String?
+  answer   String
+  lessonId Int
+  lesson   Lesson  @relation(fields: [lessonId], references: [id])
+}

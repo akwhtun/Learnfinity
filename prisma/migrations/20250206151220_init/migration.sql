@@ -1,0 +1,5 @@
+-- CreateTable
+CREATE TABLE "Lesson" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "lesson" TEXT NOT NULL
+);
