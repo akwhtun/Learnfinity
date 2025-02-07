@@ -6,7 +6,11 @@ const prisma = new PrismaClient();
 export async function GET() {
     try {
         // Fetch all lessons
-        const lessons = await prisma.lesson.findMany();
+        const lessons = await prisma.lesson.findMany({
+            include: {
+              skill: true
+            },
+          })
 
         return NextResponse.json(
             { message: "Lessons fetched successfully", lessons },
@@ -23,19 +27,19 @@ export async function GET() {
 
 export async function POST(req) {
     try {
-        const { lesson } = await req.json();
+        const { title, description, skillId } = await req.json();
 
         // Validate input
-        if (!lesson) {
+        if (!title || !description || !skillId) {
             return NextResponse.json(
-                { error: "Lesson is required." },
+                { error: "All title, description and skillId are required." },
                 { status: 400 }
             );
         }
 
         // Create a new lesson
         const newLesson = await prisma.lesson.create({
-            data: { lesson },
+            data: { title,description, skillId },
         });
 
         return NextResponse.json(
@@ -53,12 +57,12 @@ export async function POST(req) {
 
 export async function PUT(req) {
     try {
-        const { id, lesson } = await req.json();
+        const { id, title, description, skillId } = await req.json();
 
         // Validate input
-        if (!id || !lesson) {
+        if (!id || !title || !description || !skillId) {
             return NextResponse.json(
-                { error: "Both id and lesson are required." },
+                { error: "All id,title,description and skillId are required." },
                 { status: 400 }
             );
         }
@@ -66,7 +70,7 @@ export async function PUT(req) {
         // Update the lesson
         const updatedLesson = await prisma.lesson.update({
             where: { id: parseInt(id) }, // Ensure id is an integer
-            data: { lesson },
+            data: { title, description, skillId },
         });
 
         return NextResponse.json(

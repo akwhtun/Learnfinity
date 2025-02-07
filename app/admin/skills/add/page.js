@@ -78,7 +78,7 @@ export default function AddSkill() {
 
                     <button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 rounded-lg font-semibold text-lg shadow-md transition transform hover:scale-105 hover:shadow-xl">
+                        className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 rounded-lg font-semibold text-lg shadow-md transition transform">
                         🚀 Add Skill
                     </button>
                 </form>

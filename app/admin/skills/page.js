@@ -30,7 +30,7 @@ export default function AdminSkills() {
                     const data = await fetchSkills();
                     setSkills(data.skills);
                 } catch (error) {
-                    setError("Error fetching lessons:", error.message || error);
+                    setError("Error fetching skills:", error.message || error);
                 } finally {
                     setLoading(false);
                 }
@@ -44,7 +44,7 @@ export default function AdminSkills() {
                 setSkills(skills.filter((skill) => skill.id !== id));
                 handleShowAlert("success", data.message)
             } catch (error) {
-                handleShowAlert("error","Error deleting lesson:", error.message || error);
+                handleShowAlert("error","Error deleting skill:", error.message || error);
             }
         }
 
