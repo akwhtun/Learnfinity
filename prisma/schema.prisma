@@ -44,7 +44,7 @@ model Activity {
   title       String
   description String
   content     String
-  image       String?
+  image       String?   
   lessonId    Int
   lesson      Lesson     @relation(fields: [lessonId], references: [id])
   progress    Progress[]

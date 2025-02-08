@@ -34,7 +34,7 @@ export default function Alert({ type, message, onClose }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
-        className={`fixed  top-20 left-1/2 p-4 rounded-lg shadow-lg ${bg} ${text} flex items-center space-x-3`}
+        className={`fixed z-10 top-20 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-lg ${bg} ${text} flex items-center space-x-3`}
       >
         <span className="text-xl">{icon}</span>
         <p className="font-semibold">{message}</p>
@@ -42,6 +42,7 @@ export default function Alert({ type, message, onClose }) {
           &times;
         </button>
       </motion.div>
-    </AnimatePresence>
+  </AnimatePresence>
+  
   );
 }

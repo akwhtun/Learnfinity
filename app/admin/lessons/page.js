@@ -65,7 +65,7 @@ export default function AdminSkills() {
       
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-bold text-gray-800">Lesson Management</h2>
-        <Link href="/admin/lessons/add" className="w-52 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-center px-4 py-2 rounded-full shadow-lg flex items-center text-lg font-semibold transition-transform transform">
+        <Link href="/admin/lessons/add" className="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold px-6 py-3 rounded-full shadow-lg">
           Add New Lesson
         </Link>
       </div>
