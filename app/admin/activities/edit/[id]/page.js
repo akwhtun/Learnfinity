@@ -169,7 +169,7 @@ export default function EditActivity({ params }) {
                         id="lessonSelect"
                         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
                         value={selectedLessonId} 
-                        onChange={(e) => selectedLessonId(e.target.value)} // Handle change
+                        onChange={(e) => setSelectedLessonId(e.target.value)} // Handle change
                     >
                         <option value="">Select a Lesson</option>
                         {lessons.map((lesson) => (

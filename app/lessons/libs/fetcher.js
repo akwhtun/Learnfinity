@@ -1,15 +1,15 @@
-const API_BASE_URL = "/api/lessons"; // Base URL for your API routes
+const API_BASE_URL = "/api/lessonActivities"; 
 
-// Fetch all lessons
-export const getLessons = async () => {
+export const fetchLessonActivities = async (id) => {
+    
     try {
-        const response = await fetch(API_BASE_URL);
+        const response = await fetch(`${API_BASE_URL}/${id}`);
         if (!response.ok) {
-            throw new Error("Failed to fetch lessons");
+            throw new Error("Failed to fetch lessonActivities");
         }
         return await response.json();
     } catch (error) {
-        console.error("Error fetching lessons:", error.message || error);
+        console.error("Error fetching lessonActivities:", error.message || error);
         throw error;
     }
 };
