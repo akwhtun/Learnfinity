@@ -1,0 +1,7 @@
+# to add 'level' and 'category' column to lesson table 
+# video and audio lesson
+# Option for kids to record their own voice reading the story
+# Kids repeat words, and the system evaluates pronunciation.
+# Plays a drag-and-drop game matching colors.
+# Earn Rewards → Gets a "Color Champion" badge.
+#- Progress tracking to see improvement.

@@ -108,7 +108,7 @@ export default function LearningActivity({ params }) {
                 transition={{ duration: 0.5 }}
             >
 <div className="flex items-center justify-around">
-                <Link href="/">
+                <Link href="/lessons/lists">
                     <button
                         className="px-4 py-2  bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition"
                     >
