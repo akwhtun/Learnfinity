@@ -44,12 +44,32 @@ model Activity {
   title       String
   description String
   content     String
-  image       String?   
+  image       String?
   lessonId    Int
   lesson      Lesson     @relation(fields: [lessonId], references: [id])
   progress    Progress[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+}
+
+model Test {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  level       String
+  category    String
+  image       String?
+  Quizes      Quiz[]
+}
+
+model Quiz {
+  id        Int     @id @default(autoincrement())
+  word      String
+  quizWord  String
+  wordSplit Boolean
+  image     String?
+  testId    Int
+  Test      Test    @relation(fields: [testId], references: [id])
 }
 
 model Progress {

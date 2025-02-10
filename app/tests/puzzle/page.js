@@ -46,7 +46,7 @@ export default function VocabularyGame() {
       
         const input = e.target.value;
         setUserInput(input);
-        setIndex(pre => pre+1)
+        setIndex(input.length -1)
 
         let currentWord =words[currentWordIndex].word; 
        
