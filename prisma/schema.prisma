@@ -64,9 +64,9 @@ model Test {
 
 model Quiz {
   id        Int     @id @default(autoincrement())
-  word      String
+  sentence  String
   quizWord  String
-  wordSplit Boolean
+  wordSplit Int     @default(0)
   image     String?
   testId    Int
   Test      Test    @relation(fields: [testId], references: [id])
