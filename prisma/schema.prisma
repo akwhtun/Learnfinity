@@ -60,6 +60,7 @@ model Test {
   category    String
   image       String?
   Quizes      Quiz[]
+  MultipleChoices MultipleChoice[]
 }
 
 model Quiz {
@@ -67,6 +68,16 @@ model Quiz {
   sentence  String
   quizWord  String
   wordSplit Int     @default(0)
+  image     String?
+  testId    Int
+  Test      Test    @relation(fields: [testId], references: [id])
+}
+
+model MultipleChoice {
+  id        Int     @id @default(autoincrement())
+  question  String
+  answer  String
+  otherWords String
   image     String?
   testId    Int
   Test      Test    @relation(fields: [testId], references: [id])

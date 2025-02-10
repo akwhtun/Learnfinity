@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 const words = [
     { word: "elephant", image: "/images/elephant.jpg" },
     { word: "giraffe", image: "/images/giraffe.jpg" },

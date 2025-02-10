@@ -7,21 +7,22 @@ export async function GET(req, { params }) {
 
     try {
         const { id } = params;
-        const quiz = await prisma.quiz.findFirst({
+        const testQuizes = await prisma.quiz.findMany({
             where: {
-                id: parseInt(id),
+                testId: parseInt(id),
             },
-            include:{
-                Test:true
+            include: {
+                Test: true
             }
         });
+        
 
         return NextResponse.json(
-            { message: "Quiz fetched successfully", quiz },
+            { message: "TestQuizes fetched successfully", testQuizes },
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error fetching quiz:", error.message || error);
+        console.error("Error fetching testQuizes:", error.message || error);
         return NextResponse.json(
             { error: "Internal server error" },
             { status: 500 }
