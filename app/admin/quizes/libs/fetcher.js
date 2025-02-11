@@ -59,14 +59,14 @@ export const createQuiz = async (formData) => {
 }
 };
 
-export const updatedQuiz = async (formData) => {
+export const updatedQuiz = async (formData) => {  
     try {
         const response = await fetch(`${API_BASE_URL}`, {
             method: "PUT",
             body: formData,
         });
         if (!response.ok) {
-            throw new Error("Failed to update quiz");
+            throw new Error("Failed to update quiz...");
         }
         return await response.json();
     } catch (error) {

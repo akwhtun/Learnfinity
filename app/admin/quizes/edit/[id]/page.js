@@ -10,12 +10,12 @@ import Link from 'next/link';
 import { fetchQuiz, updatedQuiz } from '../../libs/fetcher';
 import { fetchTests } from '@/app/admin/tests/libs/fetcher';
 
-export default function EditTest({ params }) {
+export default function EditQuiz({ params }) {
     const { id } = React.use(params);
 
     const [sentence, setSentence] = useState('');
     const [quizWord, setQuizWord] = useState('');
-    const [wordSplit, setWordSplit] = useState('')
+    const [wordSplit, setWordSplit] = useState()
     const [selectedTestId, setSelectedTestId] = useState('')
     const [image, setImage] = useState('')
     const [tests, setTests] = useState([])
@@ -38,7 +38,7 @@ export default function EditTest({ params }) {
                 const data = await fetchTests();
                 setTests(data.tests);
             } catch (error) {
-                setError(`Error fetching quiz: ${error.message || error}`);
+                setError(`Error fetching test: ${error.message || error}`);
 
             } finally {
                 setLoading(false);
@@ -57,7 +57,7 @@ export default function EditTest({ params }) {
                 setWordSplit(data.quiz.wordSplit)
                 setSelectedTestId(data.quiz.testId)
                 setImage(data.quiz.image)
-                
+
             } catch (error) {
                 setError(`Error fetching quiz: ${error.message || error}`);
 
@@ -85,7 +85,7 @@ export default function EditTest({ params }) {
             const updateQuiz = await updatedQuiz(formData)
             handleShowAlert("success", updateQuiz.message)
         } catch (error) {
-            handleShowAlert("error", "Error updating test:", error.message || error);
+            handleShowAlert("error", "Error updating quiz:", error.message || error);
         } finally {
             setLoading(false);
         }
@@ -99,7 +99,7 @@ export default function EditTest({ params }) {
         return (<Error error={error} />)
     }
 
-    
+
 
     return (
         <div className="min-h-screen mt-16 flex items-center justify-center bg-gray-100 p-4">
@@ -133,7 +133,7 @@ export default function EditTest({ params }) {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium">Quiz Word</label>
+                        <label className="block text-gray-700 font-medium">quizWord</label>
                         <input
                             type="text"
                             value={quizWord || ""}
@@ -147,15 +147,15 @@ export default function EditTest({ params }) {
                         id="wordSplit"
                         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
                         value={wordSplit}
-                        onChange={(e) => setWordSplit(e.target.value)} // Handle change
+                        onChange={(e) => setWordSplit(parseInt(e.target.value))} // Convert to number
                     >
-                        <option value="">Define word split or not</option>
-                        <option value={1}>
-                            Split Word
-                        </option>
-                        <option value={0}>
-                            Not Split Word
-                        </option>
+                       <option value="">Define wordSplit or not</option>
+                            <option value={1}>
+                                    Split Word
+                            </option>
+                            <option value={2}>
+                                    Not Split Word
+                            </option>
                     </select>
 
                     <select
@@ -183,7 +183,7 @@ export default function EditTest({ params }) {
                         {image && (
                             <img
                                 src={`/uploads/quizes/${image}`}
-                                alt={sentence}
+                                alt={quizWord}
                                 className="w-full h-40 object-cover rounded-lg mb-4"
                             />)}
                     </div>

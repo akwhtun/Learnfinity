@@ -5,3 +5,14 @@
 # Plays a drag-and-drop game matching colors.
 # Earn Rewards → Gets a "Color Champion" badge.
 #- Progress tracking to see improvement.
+
+i want to create a multiple choice quiz question page with question and showing many answer including correct answer for kid.this page will include these data , i will provide you my database schema "
+model MultipleChoice {
+  id        Int     @id @default(autoincrement())
+  question  String
+  answer  String
+  otherWords String
+  image     String?
+  testId    Int
+  Test      Test    @relation(fields: [testId], references: [id])
+}" and in that page i want to use audio icon to also listen the question for kid.after clicking the one answer then show correct or not,if not correct ,show correct answer like hightlight the answer,provide that page with json data array ,the data is like above my schema.so create it cool,beautiful and interesting ui for kid, i use nexjs, with js,tailwind and framer motion

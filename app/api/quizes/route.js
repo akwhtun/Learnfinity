@@ -96,7 +96,6 @@ export async function POST(req) {
 export async function PUT(req) {
     try {
         const form = await req.formData();
-
         const id = form.get('id')
         const sentence = form.get('sentence');
         const quizWord = form.get('quizWord')
@@ -111,6 +110,7 @@ export async function PUT(req) {
         } else {
             isContainNewImage = false;
         }
+
 
         // Validate input
         if (!id || !sentence || !quizWord || !wordSplit || !testId ) {
@@ -156,7 +156,6 @@ export async function PUT(req) {
 
         }
         
-
     let updatedQuiz;
       if(isContainNewImage){
          updatedQuiz = await prisma.quiz.update({

@@ -36,7 +36,7 @@ export default function QuizList({params}) {
     return (
         <div className="flex flex-col mt-10 items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 p-6">
         {/* Back Button */}
-        <Link href="/admin/activities">
+        <Link href="/admin/quizes">
         <button 
             className="absolute top-20 left-6 px-4 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition"
         >
@@ -65,7 +65,7 @@ export default function QuizList({params}) {
             <h2 className="text-2xl font-semibold text-gray-900">{quiz.quizWord}</h2>
             
             <div className="mt-4">
-                <p className="text-gray-700 leading-relaxed"><strong>WordSplit:</strong> {quiz.wordSplit == 0 ?"No" : "Yes"}</p>
+                <p className="text-gray-700 leading-relaxed"><strong>WordSplit:</strong> {quiz.wordSplit == 1 ?"Yes" : "No"}</p>
             
             </div>
 

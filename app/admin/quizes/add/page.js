@@ -135,7 +135,7 @@ export default function AddQuiz() {
                             <option value={1}>
                                     Split Word
                             </option>
-                            <option value={0}>
+                            <option value={2}>
                                     Not Split Word
                             </option>
                         </select>

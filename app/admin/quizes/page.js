@@ -85,7 +85,7 @@ export default function Quizes() {
                                 <tr key={quiz.id} className="border-b transition hover:bg-gray-100">
                                     <td className="p-4 font-semibold text-gray-800">{quiz.sentence.slice(0,15)}...</td>
                                     <td className="p-4 text-gray-600">{quiz.quizWord}</td>
-                                    <td className="p-4 text-gray-600">{quiz.wordSplit == 0 ? "No" : "Yes"}</td>
+                                    <td className="p-4 text-gray-600">{quiz.wordSplit == 1 ? "Yes" : "No"}</td>
                                     <td className="p-4 text-gray-600">
                                         {quiz.image && (
                                             <img
