@@ -16,3 +16,5 @@ model MultipleChoice {
   testId    Int
   Test      Test    @relation(fields: [testId], references: [id])
 }" and in that page i want to use audio icon to also listen the question for kid.after clicking the one answer then show correct or not,if not correct ,show correct answer like hightlight the answer,provide that page with json data array ,the data is like above my schema.so create it cool,beautiful and interesting ui for kid, i use nexjs, with js,tailwind and framer motion
+
+in my project, i want to provide an ai assistant chat bot to help for kid english learning. so the following is my chat bot code , modifhy that into next js code and fill necessary, and also modify nad provide cool, and interesting ui for kid.  
