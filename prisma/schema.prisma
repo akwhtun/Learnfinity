@@ -11,13 +11,11 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  name      String
-  email     String     @unique
-  password  String?
-  progress  Progress[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id      Int     @id @default(autoincrement())
+  name    String
+  email   String  @unique
+  image   String
+  isAdmin Boolean @default(false)
 }
 
 model Skill {
@@ -53,13 +51,13 @@ model Activity {
 }
 
 model Test {
-  id          Int     @id @default(autoincrement())
-  title       String
-  description String
-  level       String
-  category    String
-  image       String?
-  Quizes      Quiz[]
+  id              Int              @id @default(autoincrement())
+  title           String
+  description     String
+  level           String
+  category        String
+  image           String?
+  Quizes          Quiz[]
   MultipleChoices MultipleChoice[]
 }
 
@@ -67,26 +65,26 @@ model Quiz {
   id        Int     @id @default(autoincrement())
   sentence  String
   quizWord  String
-  wordSplit Int     
+  wordSplit Int
   image     String?
   testId    Int
   Test      Test    @relation(fields: [testId], references: [id])
 }
 
 model MultipleChoice {
-  id        Int     @id @default(autoincrement())
-  question  String
-  answer  String
+  id         Int     @id @default(autoincrement())
+  question   String
+  answer     String
   otherWords String
-  image     String?
-  testId    Int
-  Test      Test    @relation(fields: [testId], references: [id])
+  image      String?
+  testId     Int
+  Test       Test    @relation(fields: [testId], references: [id])
 }
 
 model Progress {
   id         Int      @id @default(autoincrement())
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
+  // userId     Int
+  // user       User     @relation(fields: [userId], references: [id])
   activityId Int
   activity   Activity @relation(fields: [activityId], references: [id])
   score      Int      @default(0) // Score or completion status
