@@ -8,7 +8,12 @@ const prisma = new PrismaClient();
 
 export async function GET() {
     try {
-        const tests = await prisma.test.findMany();
+        const tests = await prisma.test.findMany({
+            include:{
+                Quizes:true,
+                MultipleChoices: true
+            }
+        });
 
         return NextResponse.json(
             { message: "Tests fetched successfully", tests },

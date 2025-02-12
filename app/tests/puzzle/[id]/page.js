@@ -119,13 +119,20 @@ export default function VocabularyGame({ params }) {
             {/* Game Container */}
             {quiz.length > 0 ?
                 (<div>
-                    <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center relative">
-                        <Link 
-                            href={"/tests"}
-                            className="absolute top-3 left-6 text-purple-800 hover:text-purple-600 text-3xl font-extrabold"
-                        >
-                            &larr; 
-                        </Link >
+                    <div className="relative mb-4">
+                      <Link
+                href={"/tests"}
+                className="absolute top-0 left-4 text-purple-800 hover:text-purple-600 text-3xl 
+                font-extrabold"
+            >
+                &larr;
+            </Link >
+                    <h2 className="text-2xl text-center font-bold text-purple-800 ">
+                        {quiz[0].Test.title}
+                    </h2>
+                    </div>
+                    <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center ">
+                       
                         <p className="text-2xl font-bold text-purple-800 mb-3 -mt-1">
                             {currentWordIndex + 1} / {quiz.length}
                         </p>

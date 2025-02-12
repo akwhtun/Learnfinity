@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchTestMultipleChoices } from "../../libs/fetcher";
 import Loading from "@/app/loading/page";
@@ -56,7 +57,7 @@ export default function MultipleChoiceQuiz({ params }) {
     }, []);
 
     useEffect(() => {
-        if (multipleChoices.length >0 && currentQuestion) {
+        if (multipleChoices.length > 0 && currentQuestion) {
             const answers = [currentQuestion.answer, ...currentQuestion.otherWords.split(",")];
             setShuffledAnswers(answers.sort(() => Math.random() - 0.5));
         }
@@ -69,7 +70,7 @@ export default function MultipleChoiceQuiz({ params }) {
             setShowFeedback(true);
 
             if (answer === currentQuestion.answer) {
-                scoreRef.current +=1
+                scoreRef.current += 1
                 setScore(scoreRef.current);
             }
 
@@ -105,15 +106,30 @@ export default function MultipleChoiceQuiz({ params }) {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 flex flex-col items-center justify-center p-6">
-            <h1 className="text-4xl font-bold text-purple-800 mb-8">
+        <div className="min-h-screen relative mt-14 bg-gradient-to-r from-blue-50 to-purple-50 flex flex-col items-center justify-center p-6">
+            <h1 className="text-4xl font-bold text-purple-800 mb-4">
                 Multiple Choice Quiz 🎮
             </h1>
 
-
             {multipleChoices.length > 0 ?
                 (<div>
-                    <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center">
+                    <div className="relative mb-4">
+                      <Link
+                href={"/tests"}
+                className="absolute top-0 left-4 text-purple-800 hover:text-purple-600 text-3xl 
+                font-extrabold"
+            >
+                &larr;
+            </Link >
+                    <h2 className="text-2xl text-center font-bold text-purple-800 ">
+                        {multipleChoices[0].Test.title}
+                    </h2>
+                    </div>
+                    <div className="bg-white  rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center">
+
+                        <p className="text-2xl font-bold text-purple-800 mb-3 -mt-1">
+                            {currentQuestionIndex + 1} / {multipleChoices.length}
+                        </p>
                         {/* Question */}
                         <div className="flex items-center justify-center space-x-4 mb-6">
                             <h2 className="text-2xl font-semibold text-gray-800">
@@ -186,8 +202,8 @@ export default function MultipleChoiceQuiz({ params }) {
                         Listen to the question, choose the correct answer, and see how many you can get right! 🍀
                     </p>
                 </div>
-        ) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
-}
-</div>
+                ) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
+            }
+        </div>
     );
 }

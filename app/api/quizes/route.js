@@ -8,7 +8,9 @@ const prisma = new PrismaClient();
 
 export async function GET() {
     try {
-        const quizes = await prisma.quiz.findMany();
+        const quizes = await prisma.quiz.findMany({
+            
+        });
 
         return NextResponse.json(
             { message: "Quizes fetched successfully", quizes },
