@@ -31,7 +31,7 @@ export default function Page() {
                     </span>
                     <button
                         onClick={() =>
-                            signOut({ callbackUrl: "/" }) 
+                            signOut() 
                         }
                         className="block w-full text-left px-4 py-2 hover:bg-violet-100"
                     >
@@ -40,7 +40,7 @@ export default function Page() {
                 </div>
             ) : (
                 <button
-                    onClick={() => signIn("google", { callbackUrl })}
+                    onClick={() => signIn("google")}
                     className="lg:mt-1 mt-48 flex items-center px-4 py-2 border rounded-md shadow-sm text-lg font-medium bg-violet-600 text-white"
                 >
                     <img

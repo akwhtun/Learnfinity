@@ -95,7 +95,7 @@ export default function VocabularyGame({ params }) {
                     setCurrentWordIndex((prev) => (prev + 1));
                 }
                 if (currentWordIndex == quiz.length - 1) {
-                    router.push(`/tests/save?score=${scoreRef.current}&total=${quiz.length}`)
+                    router.push(`/tests/save?score=${scoreRef.current}&total=${quiz.length}&testId=${quiz[0].Test.id}`)
                 }
             }, 1500);
         }

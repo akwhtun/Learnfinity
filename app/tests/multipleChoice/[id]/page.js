@@ -82,7 +82,7 @@ export default function MultipleChoiceQuiz({ params }) {
                     setCurrentQuestionIndex((prev) => (prev + 1));
                 }
                 if (currentQuestionIndex == multipleChoices.length - 1) {
-                    router.push(`/tests/save?score=${scoreRef.current}&total=${multipleChoices.length}`)
+                    router.push(`/tests/save?score=${scoreRef.current}&total=${multipleChoices.length}&testId=${multipleChoices[0].Test.id}`)
                 }
             }, 1500);
         }

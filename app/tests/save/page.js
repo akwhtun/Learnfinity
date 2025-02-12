@@ -4,26 +4,52 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { createProgress } from "../libs/fetcher";
+import Loading from "@/app/loading/page";
+import Error from "@/app/admin/error/page";
+import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function QuizResult() {
 
+  const { data: session  } = useSession();
   const searchParams = useSearchParams()
   const router = useRouter();
   const [saveStatus, setSaveStatus] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const score = searchParams.get("score")
   const total = searchParams.get("total")
+  const testId = searchParams.get("testId")
 
-  const handleSave = () => {
-    // Add your saving logic here (e.g., an API call)
-    setSaveStatus("saved");
+  const handleSave = async() => {
+    try {
+      setLoading(true)
+      const data = await createProgress(session?.user?.id,testId,score)
+      if(data){
+      setSaveStatus("saved");
+      setTimeout(() => {
+router.push("/tests")
+      }, 1000)
+      }
+    } catch (error) {
+      setError("error", "Error creating skill:", error.message || error);
+    }finally{
+      setLoading(false)
+    }
   };
 
   const handleDontSave = () => {
     setSaveStatus("not_saved");
-    // Optionally, navigate back to the home or dashboard page
-    router.push("/");
+    router.push("/tests");
   };
 
+  if(loading){
+    return (<Loading/>)
+  }
+  if(error){
+    return (<Error error={error}/>)
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-100 to-blue-200 p-6">
       <motion.div
@@ -32,6 +58,7 @@ export default function QuizResult() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
+          
         <h1 className="text-5xl font-bold text-purple-600 mb-4">
           Great Job!
         </h1>
@@ -44,14 +71,22 @@ export default function QuizResult() {
           Would you like to save your result?
         </p>
         <div className="flex justify-center gap-4">
-          <motion.button
+
+         {session?.user ? ( <motion.button
             className="px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition transform"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleSave}
           >
+            Save Result 
+          </motion.button>) : ( <motion.button
+            className="px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition transform"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={()=>signIn("google")}
+          >
             Save Result
-          </motion.button>
+          </motion.button>)}
           <motion.button
             className="px-6 py-3 bg-gray-500 text-white rounded-full shadow-md hover:bg-gray-600 transition transform"
             whileHover={{ scale: 1.05 }}
