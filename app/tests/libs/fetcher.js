@@ -50,3 +50,18 @@ export const createProgress = async (userId, testId, score) => {
         throw error;
     }
 };
+
+
+export const fetchScores = async () => {
+
+    try {
+        const response = await fetch(`/api/scores`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch scores");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching scores:", error.message || error);
+        throw error;
+    }
+};

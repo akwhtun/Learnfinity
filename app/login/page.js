@@ -2,6 +2,7 @@
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Loading from "../admin/loading/page";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -9,7 +10,7 @@ export default function Page() {
     const callbackUrl = searchParams?.get("callbackUrl") || "/";
 
     if (status === "loading") {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
     return (
