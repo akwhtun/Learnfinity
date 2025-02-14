@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (
-    <div className="flex flex-col bg-transparent items-center justify-center min-h-screen text-gray-900">
+    <div className="flex flex-col items-center justify-center bg-transparent min-h-screen  text-gray-900">
       <motion.div
         className="flex space-x-2"
         initial={{ opacity: 0 }}
@@ -28,7 +28,7 @@ export default function Loading() {
         />
       </motion.div>
       <motion.h2
-        className="mt-6 text-2xl font-bold text-gray-700"
+        className="mt-6 text-2xl font-bold text-black"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ repeat: Infinity, duration: 1.5 }}

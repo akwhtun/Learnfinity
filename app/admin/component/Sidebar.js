@@ -1,20 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import {
-  ChartBarIcon,
-  UserIcon,
-  BookOpenIcon,
-  AcademicCapIcon,
-  PuzzleIcon, // Corrected icon name
-  ChartPieIcon,
-  ClipboardListIcon,
-  QuestionMarkCircleIcon,
-} from '@heroicons/react/24/solid';
+
 
 export default function Sidebar() {
   return (
     <div className="w-64 bg-gradient-to-b from-blue-800 to-purple-800 text-white p-6 shadow-xl">
-    <h1 className="text-2xl font-bold mb-8">Learnfinity Admin</h1>
+    <Link href={"/"}><h1 className="text-2xl font-bold mb-8">Learnfinity Admin</h1></Link>
     <nav>
     <ul className="space-y-3">
   <li>

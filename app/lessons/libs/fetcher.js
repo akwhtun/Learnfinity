@@ -14,6 +14,8 @@ export const fetchLessonActivities = async (id) => {
     }
 };
 
+
+
 // Create a new lesson
 export const createLesson = async (lesson) => {
     try {

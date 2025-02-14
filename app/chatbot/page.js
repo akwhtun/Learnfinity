@@ -42,14 +42,14 @@ export default function ChatBot() {
 
     return (
         <Tool>
-        <div className="lg:max-w-2xl max-w-md  mx-auto bg-violet-50 p-4 rounded-lg shadow-lg border-2 border-violet-200">
+        <div className="lg:max-w-2xl max-w-md  mx-auto bg-purple-300 p-4 rounded-lg shadow-lg border-2 border-violet-200">
           {/* Chat Header */}
           <div className="bg-violet-600 text-white text-center py-3 rounded-t-lg font-bold text-lg flex justify-center items-center">
             🤖 AI Learning Buddy
           </div>
   
           {/* Chat Messages */}
-          <div className="h-[500px] overflow-y-auto p-3 bg-white rounded-md shadow-inner">
+          <div className="h-[500px] overflow-y-auto p-3 bg-purple-300 rounded-md shadow-inner">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -68,13 +68,13 @@ export default function ChatBot() {
                     components={{
                       code: ({ node, ...props }) => (
                         <code
-                          className="bg-violet-100 text-violet-800 p-1 rounded"
+                          className="bg-violet-500 text-violet-800 p-1 rounded"
                           {...props}
                         />
                       ),
                       pre: ({ node, ...props }) => (
                         <pre
-                          className="bg-violet-100 text-violet-800 p-2 rounded-md overflow-x-auto"
+                          className="bg-violet-500 text-violet-800 p-2 rounded-md overflow-x-auto"
                           {...props}
                         />
                       ),

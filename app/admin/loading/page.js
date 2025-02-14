@@ -29,7 +29,7 @@ export default function Loading() {
       </motion.div>
 
       {/* Title with animated dots */}
-      <h2 className="mt-6 text-2xl font-bold text-gray-700">
+      <h2 className="mt-6 text-2xl font-bold text-black">
         Learnfinity
         <motion.span
           className="inline-block"

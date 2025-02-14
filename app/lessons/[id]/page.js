@@ -8,6 +8,7 @@ import { fetchLessonActivities } from "../libs/fetcher";
 import Loading from "../../loading/page";
 import Error from "../../admin/error/page";
 import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Tool from "@/app/components/Tool";
 
 export default function LearningActivity({ params }) {
@@ -113,7 +114,7 @@ export default function LearningActivity({ params }) {
                         <button
                             className="px-4 py-2 bg-violet-600 text-white rounded-lg shadow-md hover:bg-violet-700 transition"
                         >
-                            ⬅ Back
+                            <ArrowLeftIcon className="w-6 h-6" />
                         </button>
                     </Link>
                     {/* Story Title */}
