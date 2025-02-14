@@ -5,6 +5,7 @@ import Loading from "@/app/loading/page";
 import Error from "@/app/admin/error/page";
 import { fetchScores } from "../libs/fetcher";
 import { useSession } from "next-auth/react";
+import Tool from "@/app/components/Tool";
 
 const levelNames = [
     { min: 0, max: 30, name: "🌱 Little Explorer", color: "bg-red-400" },
@@ -55,7 +56,7 @@ export default function RankingBoard() {
     if (session?.user && userScores) {
         const authId = session?.user?.id;
         authUserScore = Object.values(userScores).find(userScore => userScore.userId === authId)
-        authUserLevel = getLevel(authUserScore.totalScore)
+        authUserLevel =authUserScore && getLevel(authUserScore.totalScore)
 
     }
 
@@ -81,12 +82,13 @@ export default function RankingBoard() {
     }
 
     return (
+        <Tool>
         <div className="max-w-3xl mx-auto mt-20 bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-center mb-4">🏆 Kids Test Rankings</h2>
+            <h2 className="text-2xl text-black font-bold text-center mb-4">🏆 Kids Test Rankings</h2>
             <div className="overflow-x-auto">
                 {authUserScore &&
 
-                    <div>Your rank : {authUserScore.totalScore} {authUserLevel.name}</div>
+                    <div className="my-3 text-black">Your rank : {authUserScore.totalScore} {authUserLevel.name}</div>
                 }
                 <table className="w-full border-collapse border border-gray-200">
                     <thead>
@@ -104,7 +106,7 @@ export default function RankingBoard() {
                             sortedRanking.map((kid, index) => {
                                 const level = getLevel(kid.totalScore);
                                 return (
-                                    <tr key={`${kid.userId}-${kid.testId}`} className="text-center border-b">
+                                    <tr key={`${kid.userId}-${kid.testId}`} className="text-center text-black border-b">
                                         <td className="p-2 border">{index + 1}</td>
                                         <td className="p-2 border">{kid.userName}</td>
                                         <td className="p-2 border">
@@ -128,5 +130,6 @@ export default function RankingBoard() {
                 </table>
             </div>
         </div>
+        </Tool>
     );
 }

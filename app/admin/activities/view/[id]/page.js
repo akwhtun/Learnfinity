@@ -44,7 +44,7 @@ let skillType;
     if (error) return <Error error={error} />;
 
     return (
-        <div className="flex flex-col mt-10 items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 p-6">
+        <div className="flex flex-col  items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 p-6">
         {/* Back Button */}
         <Link href="/admin/activities">
         <button 

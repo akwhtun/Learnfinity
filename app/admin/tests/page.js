@@ -53,13 +53,17 @@ export default function TestList() {
     if (error) return <Error error={error} />;
 
     return (
-        <div className="flex mt-16 min-h-screen bg-gray-100">
+        <div className="flex min-h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1 p-8">
                 {showAlert && <Alert type={alertType} message={alertMessage} onClose={() => setShowAlert(false)} />}
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-6">Test Management</h1>
-
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-gray-800">Test Management</h2>
+                    <Link href="/admin/tests/add" className="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold px-6 py-3 rounded-full shadow-lg">
+                        Add New Test
+                    </Link>
+                </div>
                 {tests.length === 0 ? (
                     <p className="text-gray-500 text-center">No tests found.</p>
                 ) : (
@@ -106,13 +110,14 @@ export default function TestList() {
                                     </div>
 
                                     <div className='mt-2'>
-                                        <Link href={`/admin/tests/edit/${test.id}`} className="px-5 py-3 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
-                                            Edit
-                                        </Link>
-                                        <Link href={`/admin/tests/view/${test.id}`} className="px-5 py-3 bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition">
+                                    <Link href={`/admin/tests/view/${test.id}`} className="px-5 py-3 bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition">
                                             View
                                         </Link>
-                                        <button onClick={() => handleDeleteTest(test.id)} className="px-4 py-2 mx-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                        <Link href={`/admin/tests/edit/${test.id}`} className="px-5 py-3 bg-yellow-400 mx-2 text-white rounded-lg hover:bg-yellow-600 transition">
+                                            Edit
+                                        </Link>
+                                       
+                                        <button onClick={() => handleDeleteTest(test.id)} className="px-4 py-2  bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                                             Delete
                                         </button>
                                     </div>

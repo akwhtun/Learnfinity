@@ -1,15 +1,27 @@
-import React from 'react'
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-200 py-6 text-center text-font mt-16 shadow-md">
-    <p className="text-gray-600">© {new Date().getFullYear()} Learnfinity. All rights reserved.</p>
-    <div className="space-x-4 mt-2">
-      <Link href="/privacy" className="text-gray-700 hover:text-blue-500">Privacy Policy</Link>
-      <Link href="/terms" className="text-gray-700 hover:text-blue-500">Terms of Service</Link>
-      <Link href="/contact" className="text-gray-700 hover:text-blue-500">Contact</Link>
-    </div>
-  </footer>
-  )
+    <footer className="w-full bg-violet-900/50 backdrop-blur-md py-6 mt-16 border-t border-violet-800 z-10">
+      <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+        <div className="text-violet-200 text-sm">
+          &copy; {new Date().getFullYear()} Learnfinity. All rights reserved.
+        </div>
+        <div className="flex space-x-6">
+          <Link href="/about" className="text-violet-200 hover:text-violet-300 transition">
+            About Us
+          </Link>
+          <Link href="/contact" className="text-violet-200 hover:text-violet-300 transition">
+            Contact
+          </Link>
+          <Link href="/privacy" className="text-violet-200 hover:text-violet-300 transition">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="text-violet-200 hover:text-violet-300 transition">
+            Terms of Service
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
 }

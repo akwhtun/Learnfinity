@@ -6,24 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fetchTestMultipleChoices } from "../../libs/fetcher";
 import Loading from "@/app/loading/page";
 import Error from "@/app/admin/error/page";
-// const multipleChoices = [
-//     {
-//         id: 1,
-//         question: "What is the color of the sky?",
-//         answer: "Blue",
-//         otherWords: "Red,Green,Yellow",
-//         image: "/images/sky.jpg",
-//         testId: 1,
-//     },
-//     {
-//         id: 2,
-//         question: "What do cows produce?",
-//         answer: "Milk",
-//         otherWords: "Eggs,Wool,Cheese",
-//         image: "/images/cow.jpg",
-//         testId: 1,
-//     },
-// ];
+import Tool from "@/app/components/Tool";
 
 export default function MultipleChoiceQuiz({ params }) {
 
@@ -106,52 +89,53 @@ export default function MultipleChoiceQuiz({ params }) {
     }
 
     return (
-        <div className="min-h-screen relative mt-14 bg-gradient-to-r from-blue-50 to-purple-50 flex flex-col items-center justify-center p-6">
-            <h1 className="text-4xl font-bold text-purple-800 mb-4">
+        <Tool>
+        <div className="min-h-screen relative flex flex-col items-center justify-center p-6">
+            <h1 className="text-4xl font-bold text-violet-200 mb-4">
                 Multiple Choice Quiz 🎮
             </h1>
-
-            {multipleChoices.length > 0 ?
-                (<div>
+    
+            {multipleChoices.length > 0 ? (
+                <div>
                     <div className="relative mb-4">
-                      <Link
-                href={"/tests"}
-                className="absolute top-0 left-4 text-purple-800 hover:text-purple-600 text-3xl 
-                font-extrabold"
-            >
-                &larr;
-            </Link >
-                    <h2 className="text-2xl text-center font-bold text-purple-800 ">
-                        {multipleChoices[0].Test.title}
-                    </h2>
+                        <Link
+                            href={"/tests"}
+                            className="absolute top-0 left-4 text-violet-200 hover:text-violet-300 text-3xl font-extrabold transition"
+                        >
+                            &larr;
+                        </Link>
+                        <h2 className="text-2xl text-center font-bold text-violet-200">
+                            {multipleChoices[0].Test.title}
+                        </h2>
                     </div>
-                    <div className="bg-white  rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center">
-
-                        <p className="text-2xl font-bold text-purple-800 mb-3 -mt-1">
+                    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center border-2 border-violet-500/30">
+                        {/* Question Counter */}
+                        <p className="text-2xl font-bold text-violet-200 mb-3 -mt-1">
                             {currentQuestionIndex + 1} / {multipleChoices.length}
                         </p>
+    
                         {/* Question */}
                         <div className="flex items-center justify-center space-x-4 mb-6">
-                            <h2 className="text-2xl font-semibold text-gray-800">
+                            <h2 className="text-2xl font-semibold text-violet-100">
                                 {currentQuestion.question}
                             </h2>
                             <button
                                 onClick={handlePlayAudio}
-                                className="p-2 bg-purple-100 rounded-full hover:bg-purple-200 transition"
+                                className="p-2 bg-violet-500/10 backdrop-blur-md rounded-full hover:bg-violet-500/20 transition"
                             >
                                 🔊
                             </button>
                         </div>
-
+    
                         {/* Image */}
                         {currentQuestion.image && (
                             <img
                                 src={currentQuestion.image}
                                 alt="Question Image"
-                                className="w-64 h-64 mx-auto object-cover rounded-lg mb-6"
+                                className="w-64 h-64 mx-auto object-cover rounded-lg mb-6 border-2 border-violet-500/30"
                             />
                         )}
-
+    
                         {/* Answer Choices */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {shuffledAnswers.map((answer, index) => (
@@ -162,11 +146,11 @@ export default function MultipleChoiceQuiz({ params }) {
                                     onClick={() => handleAnswerClick(answer)}
                                     className={`p-4 rounded-lg text-lg font-semibold transition ${showFeedback
                                         ? answer === currentQuestion.answer
-                                            ? "bg-green-500 text-white"
+                                            ? "bg-green-500/80 text-white"
                                             : selectedAnswer === answer
-                                                ? "bg-red-500 text-white"
-                                                : "bg-gray-100"
-                                        : "bg-purple-100 hover:bg-purple-200"
+                                                ? "bg-red-500/80 text-white"
+                                                : "bg-violet-500/10 backdrop-blur-md"
+                                        : "bg-violet-500/10 backdrop-blur-md hover:bg-violet-500/20"
                                         }`}
                                     disabled={showFeedback}
                                 >
@@ -174,7 +158,7 @@ export default function MultipleChoiceQuiz({ params }) {
                                 </motion.button>
                             ))}
                         </div>
-
+    
                         {/* Feedback */}
                         <AnimatePresence>
                             {showFeedback && (
@@ -182,7 +166,7 @@ export default function MultipleChoiceQuiz({ params }) {
                                     initial={{ opacity: 0, y: -20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    className="mt-6 text-2xl font-semibold"
+                                    className="mt-6 text-2xl font-semibold text-violet-100"
                                 >
                                     {selectedAnswer === currentQuestion.answer
                                         ? "Correct! 🎉"
@@ -190,20 +174,22 @@ export default function MultipleChoiceQuiz({ params }) {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-
+    
                         {/* Score */}
-                        <div className="mt-6 text-xl text-gray-700">
-                            Score: <span className="font-bold text-purple-800">{score}</span>
+                        <div className="mt-6 text-xl text-violet-100">
+                            Score: <span className="font-bold text-violet-200">{score}</span>
                         </div>
                     </div>
-
+    
                     {/* Instructions */}
-                    <p className="mt-8 text-gray-600 text-center max-w-2xl">
+                    <p className="mt-8 text-violet-200 text-center max-w-2xl">
                         Listen to the question, choose the correct answer, and see how many you can get right! 🍀
                     </p>
                 </div>
-                ) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
-            }
+            ) : (
+                <div className="text-xl text-red-400 text-center py-10">No quiz found...</div>
+            )}
         </div>
+    </Tool>
     );
 }

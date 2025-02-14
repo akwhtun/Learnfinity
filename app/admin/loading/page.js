@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-gray-900">
+    <div className="flex flex-col items-center justify-center bg-transparent min-h-screen  text-gray-900">
       {/* Bouncing Dots */}
       <motion.div
         className="flex space-x-2"

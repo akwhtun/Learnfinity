@@ -9,6 +9,7 @@ import Loading from "@/app/loading/page";
 import Error from "@/app/admin/error/page";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
+import Tool from "@/app/components/Tool";
 
 export default function QuizResult() {
 
@@ -51,7 +52,8 @@ router.push("/tests")
     return (<Error error={error}/>)
   }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-100 to-blue-200 p-6">
+    <Tool>
+    <div className="flex flex-col items-center mt-10 min-h-screen  p-6">
       <motion.div
         className="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-md"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -59,7 +61,7 @@ router.push("/tests")
         transition={{ duration: 0.5 }}
       >
           
-        <h1 className="text-5xl font-bold text-purple-600 mb-4">
+        <h1 className="text-5xl font-bold text-purple-600">
           Great Job!
         </h1>
         <p className="text-2xl text-gray-800 mb-6">
@@ -116,5 +118,6 @@ router.push("/tests")
         )}
       </motion.div>
     </div>
+    </Tool>
   );
 }

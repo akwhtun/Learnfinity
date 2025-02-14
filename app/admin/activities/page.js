@@ -39,7 +39,7 @@ export default function ActivityList() {
         fetchAllActivities();
     }, []);
 
-    const handleLessonActivity = async (id)=> {
+    const handleLessonActivity = async (id) => {
         try {
             const data = await deleteActivity(id);
             setActivities(activities.filter((activity) => activity.id !== id));
@@ -53,12 +53,18 @@ export default function ActivityList() {
     if (error) return <Error error={error} />;
 
     return (
-        <div className="flex mt-16 min-h-screen bg-gray-100">
+        <div className="flex  min-h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1 p-8">
                 {showAlert && <Alert type={alertType} message={alertMessage} onClose={() => setShowAlert(false)} />}
 
-                <h1 className="text-3xl font-bold text-gray-800 mb-6">Activity Management</h1>
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-3xl font-bold text-gray-800">Activity Management</h2>
+                    <Link href="/admin/activities/add" className="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold px-6 py-3 rounded-full shadow-lg">
+                        Add New Activity
+                    </Link>
+                </div>
+               
 
                 {activities.length === 0 ? (
                     <p className="text-gray-500 text-center">No activities found.</p>
@@ -111,13 +117,15 @@ export default function ActivityList() {
                                         Created: {new Date(activity.createdAt).toLocaleDateString()}
                                     </div>
                                     <div className='mt-2'>
-                                        <Link href={`/admin/activities/edit/${activity.id}`} className="px-5 py-3 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
-                                            Edit
-                                        </Link>
                                         <Link href={`/admin/activities/view/${activity.id}`} className="px-5 py-3 bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition">
                                             View
                                         </Link>
-                                        <button onClick={() => handleLessonActivity(activity.id)} className="px-4 py-2 mx-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+
+                                        <Link href={`/admin/activities/edit/${activity.id}`} className="px-5 py-3 mx-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
+                                            Edit
+                                        </Link>
+
+                                        <button onClick={() => handleLessonActivity(activity.id)} className="px-4 py-2  bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                                             Delete
                                         </button>
                                     </div>

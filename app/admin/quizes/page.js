@@ -56,7 +56,7 @@ export default function Quizes() {
         return (<Loading />)
     }
     return (
-        <div className="flex mt-16 min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
+        <div className="flex min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
             <Sidebar />
             <div className="flex-1 p-8">
                 {showAlert && (
@@ -96,10 +96,10 @@ export default function Quizes() {
                                         )}
                                     </td>
                                     <td className="p-4 text-center flex justify-center gap-3">
-                                        <Link href={`/admin/quizes/view/${quiz.id}`} className="px-4 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
+                                        <Link href={`/admin/quizes/view/${quiz.id}`} className="px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-yellow-600 transition">
 View
                                         </Link>
-                                        <Link href={`/admin/quizes/edit/${quiz.id}`} className="px-4 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
+                                        <Link href={`/admin/quizes/edit/${quiz.id}`} className="px-4 py-2 mx-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
                                             Edit
                                         </Link>
                                         <button onClick={() => handleQuizDelete(quiz.id)} className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">

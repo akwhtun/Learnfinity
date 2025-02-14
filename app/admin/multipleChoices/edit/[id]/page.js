@@ -114,7 +114,7 @@ export default function EditTest({ params }) {
             >
                 <Link
                     href="/admin/multipleChoices"
-                    className="px-4 py-2  w-40 mx-auto flex justify-center items-center bg-gray-200 rounded-lg shadow-md hover:bg-gray-300 transition mb-4"
+                    className="px-4 py-2  w-60 mx-auto flex justify-center items-center bg-gray-200 rounded-lg shadow-md hover:bg-gray-300 transition mb-4"
                 >
                     Back to MultipleChoice
                 </Link>

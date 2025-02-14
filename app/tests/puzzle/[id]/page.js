@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Loading from "@/app/loading/page";
 import Error from "@/app/admin/error/page";
 import Link from "next/link";
+import Tool from "@/app/components/Tool";
 
 export default function VocabularyGame({ params }) {
     const router = useRouter();
@@ -111,8 +112,9 @@ export default function VocabularyGame({ params }) {
     }
 
     return (
-        <div className="min-h-screen mt-16 bg-gradient-to-r from-yellow-100 to-pink-100 flex flex-col items-center justify-center p-6">
-            <h1 className="text-4xl font-bold text-purple-800 mb-6">
+        <Tool>
+        <div className="min-h-screen flex flex-col items-center justify-center p-6">
+            <h1 className="text-4xl font-bold text-purple-600 mb-6">
                 Vocabulary Game 🎮
             </h1>
 
@@ -122,18 +124,18 @@ export default function VocabularyGame({ params }) {
                     <div className="relative mb-4">
                       <Link
                 href={"/tests"}
-                className="absolute top-0 left-4 text-purple-800 hover:text-purple-600 text-3xl 
+                className="absolute top-0 left-4 text-purple-600 hover:text-purple-600 text-3xl 
                 font-extrabold"
             >
                 &larr;
             </Link >
-                    <h2 className="text-2xl text-center font-bold text-purple-800 ">
+                    <h2 className="text-2xl text-center font-bold text-purple-600 ">
                         {quiz[0].Test.title}
                     </h2>
                     </div>
-                    <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center ">
+                    <div className="rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center ">
                        
-                        <p className="text-2xl font-bold text-purple-800 mb-3 -mt-1">
+                        <p className="text-2xl font-bold text-purple-600 mb-3 -mt-1">
                             {currentWordIndex + 1} / {quiz.length}
                         </p>
                         {/* Picture */}
@@ -162,7 +164,7 @@ export default function VocabularyGame({ params }) {
                             type="text"
                             value={userInput}
                             onChange={handleInput}
-                            className="w-full p-3 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-500 text-2xl text-center"
+                            className="w-full p-3 text-purple-600 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-500 text-2xl text-center"
                             maxLength={quiz[currentWordIndex].quizWord.length}
                         />
 
@@ -181,17 +183,18 @@ export default function VocabularyGame({ params }) {
                         </AnimatePresence>
 
                         {/* Score */}
-                        <div className="mt-6 text-xl text-gray-700">
-                            Score: <span className="font-bold text-purple-800">{score}</span>
+                        <div className="mt-6 text-xl text-black">
+                            Score: <span className="font-bold text-purple-600">{score}</span>
                         </div>
                     </div>
 
                     {/* Instructions */}
-                    <p className="mt-8 text-gray-600 text-center max-w-2xl">
+                    <p className="mt-8 text-black text-center max-w-2xl">
                         Look at the picture and fill in the blanks to complete the word. Good luck! 🍀
                     </p>
                 </div>) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
             }
         </div>
+        </Tool>
     );
 }

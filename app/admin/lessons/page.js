@@ -56,7 +56,7 @@ export default function AdminSkills() {
             return (<Loading/>)
         }
   return (
-    <div className="flex mt-16 min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
+    <div className="flex  min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
     <Sidebar />
     <div className="flex-1 p-8">
       {showAlert && (
