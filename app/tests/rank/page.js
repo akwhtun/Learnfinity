@@ -7,15 +7,8 @@ import { fetchScores } from "../libs/fetcher";
 import { useSession } from "next-auth/react";
 import Tool from "@/app/components/Tool";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import { levelNames } from "@/app/admin/component/LevelNames";
 import Link from "next/link";
-
-const levelNames = [
-    { min: 0, max: 30, name: "🌱 Little Explorer", color: "bg-red-400" },
-    { min: 31, max: 50, name: "🏆 Junior Learner", color: "bg-orange-400" },
-    { min: 51, max: 70, name: "🚀 Smart Thinker", color: "bg-yellow-400" },
-    { min: 71, max: 90, name: "🌟 Brainy Champ", color: "bg-green-400" },
-    { min: 91, max: 100, name: "👑 Master Genius", color: "bg-blue-400" }
-];
 
 export default function RankingBoard() {
 
@@ -102,7 +95,7 @@ export default function RankingBoard() {
                     }
                     <table className="w-full border-collapse border border-gray-200">
                         <thead>
-                            <tr className="bg-gray-200 text-gray-700">
+                            <tr className="bg-violet-600 text-white">
                                 <th className="p-2 border">Rank 🏆</th>
                                 <th className="p-2 border">User 👤</th>
                                 <th className="p-2 border">Test 📄</th>

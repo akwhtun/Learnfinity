@@ -10,6 +10,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Tool from "../components/Tool";
 import { categories } from "../admin/component/Categories";
 import { levels } from "../admin/component/Levels";
+import {TrophyIcon} from "@heroicons/react/24/solid";
 
 export default function TestListPage() {
     const [tests, setTests] = useState([])
@@ -58,6 +59,12 @@ export default function TestListPage() {
                     <h1 className="md:text-4xl text-2xl font-bold text-violet-200 text-center mb-8">
                         Choose a Test 🧠
                     </h1>
+                    <Link
+                        href={"/tests/rank"}
+                        className="flex items-center absolute right-0 top-0 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
+                    >
+                        <TrophyIcon className="w-6 h-6" /> Ranks
+                    </Link>
                 </div>
 
                 {/* Search and Filters */}

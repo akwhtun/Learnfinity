@@ -3,17 +3,22 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export async function GET(req, { params }) {
+
     try {
-        const scores = await prisma.progress.findMany({
+        const { id } = params;
+        const userScores = await prisma.progress.findMany({
+            where: {
+                userId: parseInt(id)
+            },
             include: {
-                user: true,   
-                test: true    
+                user: true,
+                test: true
             }
         });
-        
+
         return NextResponse.json(
-            { message: "Scores fetched successfully", scores },
+            { message: "Scores fetched successfully", userScores },
             { status: 200 }
         );
     } catch (error) {
