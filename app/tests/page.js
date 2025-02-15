@@ -52,16 +52,16 @@ export default function TestListPage() {
                 <div className="relative">
                     <Link
                         href={"/"}
-                        className="flex items-center absolute left-0 top-0 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
+                        className="absolute left-0 top-0 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
                     >
                         <ArrowLeftIcon className="w-6 h-6" />
                     </Link>
-                    <h1 className="md:text-4xl text-2xl font-bold text-violet-200 text-center mb-8">
+                    <h1 className="md:text-4xl text-2xl font-bold text-violet-200 text-center mb-8 md:me-0 me-6">
                         Choose a Test 🧠
                     </h1>
                     <Link
                         href={"/tests/rank"}
-                        className="flex items-center absolute right-0 top-0 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
+                        className="absolute flex right-0 top-0 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
                     >
                         <TrophyIcon className="w-6 h-6" /> Ranks
                     </Link>
@@ -117,7 +117,7 @@ export default function TestListPage() {
                             >
                                 {/* Test Image */}
                                 <img
-                                    src={test.image}
+                                 src={`/uploads/tests/${test.image}`}
                                     alt={test.title}
                                     className="w-full h-48 object-cover"
                                 />

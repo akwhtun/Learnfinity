@@ -1,7 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextAuthProvider } from "./provider";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,6 +20,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+       <head>
+        <link rel="icon" href="/logo/LEARNFINITY.png" type="image/png" sizes="32x32" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="apple-touch-icon" href="/logo/LEARNFINITY.png" />
+        <title>Learnfinity</title>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
