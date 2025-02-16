@@ -23,6 +23,20 @@ export default function QuizResult() {
   const total = searchParams.get("total")
   const testId = searchParams.get("testId")
 
+  const scorePercentage = total && (score / total) * 100;
+
+let resultMessage = "Keep Practicing!";
+let messageColor = "text-yellow-500"; // Default color for "Needs Improvement"
+
+if (scorePercentage >= 90) {
+  resultMessage = "Amazing Job!";
+  messageColor = "text-green-500";
+} else if (scorePercentage >= 70) {
+  resultMessage = "Great Job!";
+  messageColor = "text-blue-500";
+}
+
+
   const handleSave = async() => {
     try {
       setLoading(true)
@@ -61,9 +75,10 @@ router.push("/tests")
         transition={{ duration: 0.5 }}
       >
           
-        <h1 className="text-5xl font-bold text-purple-600">
-          Great Job!
-        </h1>
+          <h1 className={`text-5xl font-bold ${messageColor}`}>
+  {resultMessage}
+</h1>
+
         <p className="text-2xl text-gray-800 mb-6">
           Your Score:{" "}
           <span className="text-green-500 font-extrabold">{score}</span> /{" "}
@@ -81,14 +96,7 @@ router.push("/tests")
             onClick={handleSave}
           >
             Save Result 
-          </motion.button>) : ( <motion.button
-            className="px-6 py-3 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition transform"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={()=>signIn("google")}
-          >
-            Save Result
-          </motion.button>)}
+          </motion.button>) : ( <div></div>)}
           <motion.button
             className="px-6 py-3 bg-gray-500 text-white rounded-full shadow-md hover:bg-gray-600 transition transform"
             whileHover={{ scale: 1.05 }}
