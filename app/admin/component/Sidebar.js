@@ -55,6 +55,15 @@ export default function Sidebar() {
   </li>
   <li>
     <Link
+      href="/admin/vocabularies"
+      className="flex items-center p-3 hover:bg-blue-700 rounded-lg transition duration-300"
+    >
+      <span className="mr-2">📙</span>
+      Vocabularies
+    </Link>
+  </li>
+  <li>
+    <Link
       href="/admin/tests"
       className="flex items-center p-3 hover:bg-blue-700 rounded-lg transition duration-300"
     >

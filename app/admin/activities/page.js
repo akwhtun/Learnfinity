@@ -64,7 +64,7 @@ export default function ActivityList() {
                         Add New Activity
                     </Link>
                 </div>
-               
+
 
                 {activities.length === 0 ? (
                     <p className="text-gray-500 text-center">No activities found.</p>
@@ -116,16 +116,24 @@ export default function ActivityList() {
                                     <div className="mt-4 text-xs text-gray-500">
                                         Created: {new Date(activity.createdAt).toLocaleDateString()}
                                     </div>
-                                    <div className='mt-2'>
+                                    <div className='my-4'>
+                                        <Link href={`/admin/vocabularies/${activity.id}`} className="px-5 py-3  me-2 bg-purple-400 text-white rounded-lg hover:bg-purple-600 transition">
+                                            Add Vocabulary
+                                        </Link> 
                                         <Link href={`/admin/activities/view/${activity.id}`} className="px-5 py-3 bg-blue-400 text-white rounded-lg hover:bg-blue-600 transition">
                                             View
                                         </Link>
+                                        <br/>
+                                        <Link href={`/admin/vocabularies/view/${activity.id}`} className="px-5 py-3 me-2 bg-orange-400 text-white rounded-lg hover:bg-orange-600 transition">
+                                            View Vocabularies
+                                        </Link>
+                                       
 
                                         <Link href={`/admin/activities/edit/${activity.id}`} className="px-5 py-3 mx-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 transition">
                                             Edit
                                         </Link>
 
-                                        <button onClick={() => handleLessonActivity(activity.id)} className="px-4 py-2  bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                        <button onClick={() => handleLessonActivity(activity.id)} className="px-4 py-2 mt-4  bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
                                             Delete
                                         </button>
                                     </div>

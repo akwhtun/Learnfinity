@@ -38,15 +38,26 @@ model Lesson {
 }
 
 model Activity {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   title       String
   description String
   content     String
   image       String?
   lessonId    Int
-  lesson      Lesson   @relation(fields: [lessonId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  lesson      Lesson       @relation(fields: [lessonId], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  Vocabulary  Vocabulary[]
+}
+
+model Vocabulary {
+  id             Int      @id @default(autoincrement())
+  englishWord    String
+  myanmarMeaning String
+  emoji          String
+  speech         String
+  activityId     Int
+  activity       Activity @relation(fields: [activityId], references: [id])
 }
 
 model Test {
@@ -62,23 +73,23 @@ model Test {
 }
 
 model Quiz {
-  id        Int      @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   sentence  String
   quizWord  String
   wordSplit Int
   image     String?
   testId    Int
-  Test      Test     @relation(fields: [testId], references: [id])
+  Test      Test    @relation(fields: [testId], references: [id])
 }
 
 model MultipleChoice {
-  id         Int      @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   question   String
   answer     String
   otherWords String
   image      String?
   testId     Int
-  Test       Test     @relation(fields: [testId], references: [id])
+  Test       Test    @relation(fields: [testId], references: [id])
 }
 
 model Progress {
@@ -87,7 +98,7 @@ model Progress {
   user      User     @relation(fields: [userId], references: [id])
   testId    Int
   test      Test     @relation(fields: [testId], references: [id])
-  score     Int     
+  score     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

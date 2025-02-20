@@ -50,7 +50,7 @@ let skillType;
         <button 
             className="absolute top-20 left-6 px-4 py-2 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition"
         >
-            ⬅ Back
+             Back
         </button>
         </Link>
         <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">View Activity</h1>
