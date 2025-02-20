@@ -50,6 +50,14 @@ model Activity {
   Vocabulary  Vocabulary[]
 }
 
+model Pronounciation {
+  id        Int      @id @default(autoincrement())
+  text      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Vocabulary {
   id             Int      @id @default(autoincrement())
   englishWord    String
@@ -70,26 +78,32 @@ model Test {
   Quizes          Quiz[]
   MultipleChoices MultipleChoice[]
   Progress        Progress[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
 
 model Quiz {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   sentence  String
   quizWord  String
   wordSplit Int
   image     String?
   testId    Int
-  Test      Test    @relation(fields: [testId], references: [id])
+  Test      Test     @relation(fields: [testId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model MultipleChoice {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   question   String
   answer     String
   otherWords String
   image      String?
   testId     Int
-  Test       Test    @relation(fields: [testId], references: [id])
+  Test       Test     @relation(fields: [testId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Progress {

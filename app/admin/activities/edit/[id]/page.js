@@ -96,7 +96,7 @@ export default function EditActivity({ params }) {
     }
 
     return (
-        <div className="min-h-screen mt-16 flex items-center justify-center bg-gray-100 p-4">
+        <div className="min-h-screen  flex items-center justify-center bg-gray-100 p-4">
             {showAlert && (
                 <Alert type={alertType} message={alertMessage} onClose={() => setShowAlert(false)} />
             )}

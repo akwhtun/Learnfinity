@@ -3,6 +3,8 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Tool from "../components/Tool";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([
@@ -42,8 +44,14 @@ export default function ChatBot() {
 
     return (
         <Tool>
-        <div className="lg:max-w-2xl max-w-md  mx-auto bg-purple-300 p-4 rounded-lg shadow-lg border-2 border-violet-200">
-          {/* Chat Header */}
+        <div className="lg:max-w-2xl max-w-md relative  mx-auto bg-purple-300 p-4 rounded-lg shadow-lg border-2 border-violet-200">
+
+          <Link
+                    href={"/"}
+                    className="flex items-center absolute left-6 top-14 gap-2 p-2 text-white bg-violet-600 hover:bg-violet-700 rounded-lg shadow-md transition"
+                >
+                    <ArrowLeftIcon className="w-6 h-6" />
+                </Link>
           <div className="bg-violet-600 text-white text-center py-3 rounded-t-lg font-bold text-lg flex justify-center items-center">
             🤖 AI Learning Buddy
           </div>
