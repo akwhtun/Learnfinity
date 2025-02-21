@@ -58,7 +58,7 @@ export default function SpeechRecognitionApp() {
         }
 
         const text = textObject.text;
-        const image = textObject.image;
+        const image = textObject.image || null;
         setReferenceText(text);
         setReferenceImage(image)
         setReferenceWordCount(text.split(" ").length);

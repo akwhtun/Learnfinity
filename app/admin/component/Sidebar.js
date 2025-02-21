@@ -7,7 +7,7 @@ export default function Sidebar() {
     <div className="w-64 bg-gradient-to-b from-blue-800 to-purple-800 text-white p-6 shadow-xl">
     <Link href={"/"}><h1 className="text-2xl font-bold mb-8">Learnfinity Admin</h1></Link>
     <nav>
-    <ul className="space-y-3">
+    <ul className="space-y-2">
   <li>
     <Link
       href="/admin/dashboard"
@@ -97,7 +97,17 @@ export default function Sidebar() {
       <span className="mr-2">🗣️</span>
       Pronounciations
     </Link>
-  </li>
+    </li>
+    <li>
+  <Link
+    href="/admin/contacts"
+    className="flex items-center p-3 hover:bg-blue-700 rounded-lg transition duration-300"
+  >
+    <span className="mr-2">📬</span>
+    Contacts
+  </Link>
+</li>
+
 </ul>
     </nav>
   </div>
