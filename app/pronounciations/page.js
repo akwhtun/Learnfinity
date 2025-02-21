@@ -10,6 +10,7 @@ import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 export default function SpeechRecognitionApp() {
     const [referenceTexts, setReferenceTexts] = useState([]);
     const [referenceText, setReferenceText] = useState("");
+    const [referenceImage, setReferenceImage] = useState("")
     const [userText, setUserText] = useState("");
     const [wordAccuracy, setWordAccuracy] = useState(null);
     const [spokenWordCount, setSpokenWordCount] = useState(0);
@@ -50,14 +51,16 @@ export default function SpeechRecognitionApp() {
         }
 
         const textObject = referenceTexts[index];
-        if (!textObject || !textObject.text) {
+        if (!textObject || !textObject.text ) {
             setReferenceText("Invalid reference text.");
             setReferenceWordCount(0);
             return;
         }
 
         const text = textObject.text;
+        const image = textObject.image;
         setReferenceText(text);
+        setReferenceImage(image)
         setReferenceWordCount(text.split(" ").length);
         setUserText(""); // Reset user text
         setWordAccuracy(null); // Reset accuracy
@@ -116,6 +119,9 @@ export default function SpeechRecognitionApp() {
     if (loading) return <Loading />;
     if (error) return <Error error={error} />;
 
+    console.log(referenceText);
+    
+
     return (
         <Tool>
             <div className="p-6 max-w-md mx-auto text-center bg-gradient-to-b from-purple-200 to-violet-300 rounded-3xl shadow-xl border-4 border-violet-400 relative">
@@ -128,6 +134,12 @@ export default function SpeechRecognitionApp() {
                 </Link>
                 <h1 className="text-4xl font-extrabold text-violet-800 mb-4 drop-shadow-md">🎤 Speech Fun </h1>
                 <p className="text-lg text-gray-900">Try to say this sentence:</p>
+                <img
+                    src={`/uploads/pronounciations/${referenceImage}`}
+                    alt={'img'}
+                    className="w-full h-40 object-cover rounded-lg my-4"
+                />
+                
                 <p className="mt-3 text-2xl font-bold text-white bg-violet-600 p-3 rounded-lg inline-block shadow-md">
                     "{referenceText}"
                 </p>
