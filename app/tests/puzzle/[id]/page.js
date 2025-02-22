@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchTestQuizes } from "../../libs/fetcher";
 import { useRouter } from "next/navigation";
@@ -79,16 +79,16 @@ export default function VocabularyGame({ params }) {
 
         let currentWord = quiz[currentWordIndex].quizWord;
 
-         // Check if the input matches the word
-         if (input === currentWord) {
+        // Check if the input matches the word
+        if (input === currentWord) {
             setFeedback("Correct! 🎉");
-            scoreRef.current += 1; 
-            setScore(scoreRef.current); 
+            scoreRef.current += 1;
+            setScore(scoreRef.current);
         } else if (input !== currentWord && input.length == currentWord.length) {
             setFeedback(`Wrong! ❌, Correct Word : ${currentWord}`);
         }
 
-          if (input.length == currentWord.length) {
+        if (input.length == currentWord.length) {
             setTimeout(() => {
                 setFeedback("");
                 setUserInput("")
@@ -100,7 +100,20 @@ export default function VocabularyGame({ params }) {
                 }
             }, 1500);
         }
-     
+
+    };
+
+    // Function to read the question aloud
+    const speakQuestion = () => {
+        if ("speechSynthesis" in window) {
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = quiz[currentWordIndex].sentence || "no sentence"
+            speech.lang = "en-US"; // Adjust language if needed
+            speech.rate = 1;
+            window.speechSynthesis.speak(speech);
+        } else {
+            alert("Text-to-Speech is not supported in your browser.");
+        }
     };
 
     if (error) {
@@ -113,88 +126,97 @@ export default function VocabularyGame({ params }) {
 
     return (
         <Tool>
-        <div className="min-h-screen flex flex-col items-center justify-center p-6">
-            <h1 className="text-4xl font-bold text-purple-600 mb-6">
-                Vocabulary Game 🎮
-            </h1>
+            <div className="min-h-screen flex flex-col items-center justify-center p-6">
+                <h1 className="text-4xl font-bold text-purple-600 mb-6">
+                    Vocabulary Game 🎮
+                </h1>
 
-            {/* Game Container */}
-            {quiz.length > 0 ?
-                (<div>
-                    <div className="relative mb-4">
-                      <Link
-                href={"/tests"}
-                className="absolute top-0 left-4 text-purple-600 hover:text-purple-600 text-3xl 
+                {/* Game Container */}
+                {quiz.length > 0 ?
+                    (<div>
+                        <div className="flex items-center justify-around mb-4">
+                            <Link
+                                href={"/tests"}
+                                className=" text-purple-600 hover:text-purple-600 text-3xl 
                 font-extrabold"
-            >
-                &larr;
-            </Link >
-                    <h2 className="text-2xl text-center font-bold text-purple-600 ">
-                        {quiz[0].Test.title}
-                    </h2>
-                    </div>
-                    <div className="rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center ">
-                       
-                        <p className="text-2xl font-bold text-purple-600 mb-3 -mt-1">
-                            {currentWordIndex + 1} / {quiz.length}
+                            >
+                                &larr;
+                            </Link >
+                            <h2 className="text-2xl text-center font-bold text-purple-600 ">
+                                {quiz[0].Test.title}
+                            </h2>
+                            <h2 className="text-2xl text-center font-bold text-purple-600 flex items-center justify-center gap-3">
+                                <button
+                                    onClick={speakQuestion}
+                                    className="text-purple-600 hover:text-purple-800 transition"
+                                >
+                                    🔊
+                                </button>
+                            </h2>
+                            
+                        </div>
+                        <div className="rounded-xl shadow-2xl p-8 w-full max-w-2xl text-center ">
+
+                            <p className="text-2xl font-bold text-purple-600 mb-3 -mt-1">
+                                {currentWordIndex + 1} / {quiz.length}
+                            </p>
+                            {/* Picture */}
+                            <img
+                                src={`/uploads/quizes/${quiz[currentWordIndex].image}`}
+                                alt="Guess the word"
+                                className="w-64 h-64 mx-auto object-cover rounded-lg mb-6"
+                            />
+
+                            {quiz[currentWordIndex].wordSplit == 2 ? (<div className="mt-10 mb-2 p-6 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-lg  text-xl transform transition-al"> {sentenceWord}</div>) : (<div></div>)}
+
+                            {/* Word with Blanks */}
+                            <div className={`text-3xl font-bold mb-6`}>
+                                {blankWord.split("").map((char, index) => (
+                                    <span
+                                        key={index}
+                                        className={blanks.includes(index) ? "text-black" : char == userInput.split("")[index] ? "text-green-500" : "text-blue-500"}
+                                    >
+                                        {char}
+                                    </span>
+                                ))}
+                            </div>
+
+                            {/* Input Field */}
+                            <input
+                                type="text"
+                                value={userInput}
+                                onChange={handleInput}
+                                className="w-full p-3 text-purple-600 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-500 text-2xl text-center"
+                                maxLength={quiz[currentWordIndex].quizWord.length}
+                            />
+
+                            {/* Feedback */}
+                            <AnimatePresence>
+                                {feedback && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        className="mt-6 text-2xl font-semibold"
+                                    >
+                                        {feedback}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Score */}
+                            <div className="mt-6 text-xl text-black">
+                                Score: <span className="font-bold text-purple-600">{score}</span>
+                            </div>
+                        </div>
+
+                        {/* Instructions */}
+                        <p className="mt-8 text-black text-center max-w-2xl">
+                            Look at the picture and fill in the blanks to complete the word. Good luck! 🍀
                         </p>
-                        {/* Picture */}
-                        <img
-                            src={`/uploads/quizes/${quiz[currentWordIndex].image}`}
-                            alt="Guess the word"
-                            className="w-64 h-64 mx-auto object-cover rounded-lg mb-6"
-                        />
-
-                        {quiz[currentWordIndex].wordSplit == 2 ? (<div className="mt-10 mb-2 p-6 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-lg  text-xl transform transition-al"> {sentenceWord}</div>) : (<div></div>)}
-
-                        {/* Word with Blanks */}
-                        <div className={`text-3xl font-bold mb-6`}>
-                            {blankWord.split("").map((char, index) => (
-                                <span
-                                    key={index}
-                                    className={blanks.includes(index) ? "text-black" : char == userInput.split("")[index] ? "text-green-500" : "text-blue-500"}
-                                >
-                                    {char}
-                                </span>
-                            ))}
-                        </div>
-
-                        {/* Input Field */}
-                        <input
-                            type="text"
-                            value={userInput}
-                            onChange={handleInput}
-                            className="w-full p-3 text-purple-600 border-2 border-purple-300 rounded-lg focus:outline-none focus:border-purple-500 text-2xl text-center"
-                            maxLength={quiz[currentWordIndex].quizWord.length}
-                        />
-
-                        {/* Feedback */}
-                        <AnimatePresence>
-                            {feedback && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    className="mt-6 text-2xl font-semibold"
-                                >
-                                    {feedback}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* Score */}
-                        <div className="mt-6 text-xl text-black">
-                            Score: <span className="font-bold text-purple-600">{score}</span>
-                        </div>
-                    </div>
-
-                    {/* Instructions */}
-                    <p className="mt-8 text-black text-center max-w-2xl">
-                        Look at the picture and fill in the blanks to complete the word. Good luck! 🍀
-                    </p>
-                </div>) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
-            }
-        </div>
+                    </div>) : (<div className="text-xl text-red-500 text-center py-10">No quiz found...</div>)
+                }
+            </div>
         </Tool>
     );
 }

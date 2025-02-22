@@ -113,7 +113,6 @@ const VocabularyPage = ({ params }) => {
                                             : "bg-violet-600 hover:bg-violet-500"
                                             }`}
                                     >
-                                        <SpeakerWaveIcon className="w-6 h-6" />
                                         {activeId === word.englishWord ? "🔊 Listening..." : "👂 Hear Pronunciation"}
                                     </button>
                                 </motion.div>

@@ -66,7 +66,7 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-6"
             >
-              <Link href="/signup">
+              <Link href="/lessons/lists">
                 <button className="bg-violet-600 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:bg-violet-700 transition">
                   Get Started
                 </button>

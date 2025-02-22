@@ -31,10 +31,23 @@ model Lesson {
   title       String
   description String
   activities  Activity[]
+  audios      Audio[]
   skillId     Int
   skill       Skill      @relation(fields: [skillId], references: [id])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+}
+
+model Audio {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  audio       String
+  image       String
+  lessonId    Int
+  lesson      Lesson   @relation(fields: [lessonId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Activity {
@@ -45,9 +58,9 @@ model Activity {
   image       String?
   lessonId    Int
   lesson      Lesson       @relation(fields: [lessonId], references: [id])
+  Vocabulary  Vocabulary[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  Vocabulary  Vocabulary[]
 }
 
 model Pronounciation {

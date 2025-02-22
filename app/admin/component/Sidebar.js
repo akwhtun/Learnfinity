@@ -45,6 +45,16 @@ export default function Sidebar() {
     </Link>
   </li>
   <li>
+  <Link
+    href="/admin/audios"
+    className="flex items-center p-3 hover:bg-blue-700 rounded-lg transition duration-300"
+  >
+    <span className="mr-2">🎵</span>
+    Audios
+  </Link>
+</li>
+
+  <li>
     <Link
       href="/admin/activities"
       className="flex items-center p-3 hover:bg-blue-700 rounded-lg transition duration-300"

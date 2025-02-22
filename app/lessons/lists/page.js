@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchLessons } from "@/app/admin/lessons/libs/fetcher";
-import { fetchLessonActivities } from "../libs/fetcher";
+import { fetchLessonActivities, fetchLessonAudios } from "../libs/fetcher";
 import Loading from "../../loading/page";
 import Error from "../../admin/error/page";
 import Link from "next/link";
@@ -12,16 +12,24 @@ import { fetchSkills } from "@/app/admin/skills/libs/fetcher";
 
 export default function LessonsList() {
     const [lessons, setLessons] = useState([]);
-    const [skills, setSkills] = useState([])
-    const [filterSkill, setFilterSkill] = useState('')
+    const [skills, setSkills] = useState([]);
+    const [filterSkill, setFilterSkill] = useState("");
     const [activities, setActivities] = useState([]);
+    const [audios, setAudios] = useState([]);
     const [loading, setLoading] = useState(false);
     const [activityLoading, setActivityLoading] = useState(false);
     const [error, setError] = useState("");
     const [expandedLessonId, setExpandedLessonId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("")
+    const [searchTerm, setSearchTerm] = useState("");
 
-    const filterLessons = lessons && lessons.filter(lesson => (lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) || lesson.description.toLowerCase().includes(searchTerm.toLocaleLowerCase()) )&& (filterSkill ? lesson.skill.title === filterSkill : true));
+    const filterLessons =
+        lessons &&
+        lessons.filter(
+            (lesson) =>
+                (lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    lesson.description.toLowerCase().includes(searchTerm.toLocaleLowerCase())) &&
+                (filterSkill ? lesson.skill.title === filterSkill : true)
+        );
 
     useEffect(() => {
         const fetchAllLessons = async () => {
@@ -56,9 +64,11 @@ export default function LessonsList() {
         try {
             setActivityLoading(true);
             const data = await fetchLessonActivities(lessonId);
+            const data2 = await fetchLessonAudios(lessonId);
             setActivities(data.lessonActivities);
+            setAudios(data2.lessonAudios);
         } catch (error) {
-            setError("Error fetching lesson activities: " + error);
+            setError("Error fetching lessons: " + error);
         } finally {
             setActivityLoading(false);
         }
@@ -99,12 +109,11 @@ export default function LessonsList() {
                         className="w-full sm:w-1/3 p-3 rounded-lg bg-purple-500 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-400"
                     >
                         <option value="">All Skills</option>
-                       
-                        {
-                            skills.map((skill, index) => {
-                                return (<option key={index} value={skill.title}>{skill.title}</option>)
-                            })
-                        }
+                        {skills.map((skill, index) => (
+                            <option key={index} value={skill.title}>
+                                {skill.title}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -118,14 +127,19 @@ export default function LessonsList() {
                             >
                                 {/* Lesson Header */}
                                 <div
-                                    className="p-6 cursor-pointer hover:bg-violet-500/10 transition"
+                                    className="p-6 cursor-pointer flex items-center justify-between hover:bg-violet-500/10 transition"
                                     onClick={() => toggleLesson(lesson.id)}
                                 >
                                     <h2 className="text-2xl font-semibold text-violet-200">{lesson.title}</h2>
-                                    <p className="text-violet-100 mt-2">{lesson.description}</p>
+                                    <Link
+                                        href={`/lessons/all/${lesson.id}`} // Update this path to your actual "View All Lessons" page
+                                        className="mt-4 inline-block px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition"
+                                    >
+                                        View All Lessons
+                                    </Link>
                                 </div>
-
-                                {/* Activities Section */}
+                                <p className="text-violet-100 px-8 py-5 mt-2">{lesson.description}</p>
+                                {/* Activities and Audios Section */}
                                 <AnimatePresence>
                                     {expandedLessonId === lesson.id && (
                                         <motion.div
@@ -139,6 +153,7 @@ export default function LessonsList() {
                                                 <Loading />
                                             ) : (
                                                 <div className="mt-4 space-y-4">
+                                                    {/* Activities */}
                                                     {activities.map((activity) => (
                                                         <div
                                                             key={activity.id}
@@ -158,6 +173,39 @@ export default function LessonsList() {
                                                                 className="my-5 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition"
                                                             >
                                                                 Start Activity
+                                                            </Link>
+                                                        </div>
+                                                    ))}
+
+                                                    {/* Audios */}
+                                                    {audios.map((audio) => (
+                                                        <div
+                                                            key={audio.id}
+                                                            className="p-4 bg-violet-500/10 backdrop-blur-md rounded-lg shadow-sm hover:shadow-md transition-shadow border border-white/20"
+                                                        >
+                                                            <h3 className="text-xl font-semibold text-violet-200">{audio.title}</h3>
+                                                            <p className="text-violet-100 mt-2">{audio.description}</p>
+                                                            {audio.image && (
+                                                                <img
+                                                                    src={`/uploads/audioImages/${audio.image}`}
+                                                                    alt={audio.title}
+                                                                    className="w-full h-40 object-cover rounded-lg my-4"
+                                                                />
+                                                            )}
+                                                            <div className="mt-4 mb-4">
+                                                                <audio controls className="w-full">
+                                                                    <source
+                                                                        src={`/uploads/audios/${audio.audio}`}
+                                                                        type="audio/mpeg"
+                                                                    />
+                                                                    Your browser does not support the audio element.
+                                                                </audio>
+                                                            </div>
+                                                            <Link
+                                                                href={`/lessons/audios/${audio.id}`}
+                                                                className="my-5 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition"
+                                                            >
+                                                                Listen to Audio
                                                             </Link>
                                                         </div>
                                                     ))}
